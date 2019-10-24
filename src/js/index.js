@@ -1,11 +1,16 @@
-import Hero from './Hero';
+import Hero from './models/Hero';
+import { displayHero, clearHeroBox, showLoader, clearLoader } from './views/heroView';
 
 const state = {};
 
 const searchHero = async () => {
-    const search = new Hero(document.querySelector('.btn__search').value);
-    state.search = await search.fetchHero();
-    console.log(search.result);
+    clearHeroBox();
+    showLoader();
+    state.search = new Hero(document.querySelector('.btn__search').value);
+    await state.search.fetchHero();
+    displayHero(state.search.result);
+    clearLoader();
+    console.log(state.search.result);
 }
 
 document.querySelector('.search').addEventListener('submit', e => {

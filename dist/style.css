@@ -1,35 +1,70 @@
 html {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     box-sizing: border-box;
+}
+
+body {
+    font-family: 'Bangers', cursive;
+    color: #fff;
+    background: #090909;  /* fallback for old browsers */
 }
 
 .header {
     display: flex;
     justify-content: center;
+    padding: 30px;
+    background: #ecd018;
+}
+
+.btn__search {
+    padding: 10px;
+    border-radius: 25px;
+    text-align: center;
+    outline: none;
+    border: none;
 }
 
 .content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    padding: 75px;
+    height: 85vh;
+    padding: 30px;
+    justify-content: space-evenly;
 }
 
-.item {
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 20px;
+.hero__box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.spinner-border {
+    width: 100px;
+    height: 100px;
+}
+
+.desc__box {
+    text-shadow: 1px 1px black;
+    background: rgba(255, 255, 255, 0.3);
     box-shadow: 0 3rem 6rem 1rem rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
     text-align: center;
 }
 
-.char__img {
-    width: 350px;
+.item {
+    padding: 0;
+    border: 10px solid rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    box-shadow: 0 3rem 6rem 1rem rgba(0, 0, 0, 0.25);
+    text-align: center;
+    max-width: 250px;
+    max-height: 300px;
 }
 
-.btn__details {
-    text-decoration: none;
-    padding: 5px 15px;
-    border-radius: 10px;
-    border: 1px solid black;
+.item:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.hero__name {
+    position: relative;
+    left: 40;
 }
