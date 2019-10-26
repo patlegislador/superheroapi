@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class Hero {
+export default class Heroes {
     constructor(query) {
         this.query = query;
     }
