@@ -3,10 +3,26 @@ const loader = document.querySelector('.spinner-border');
 
 export const displayHero = heroes => {
     const list = heroes.map(hero => {
-        return `<img src="${hero.image.url}" alt="${hero.name}" class="item col-4">`
+        return `
+            <a href="#${hero.id}">
+                <img src="${hero.image.url}" alt="${hero.name}" class="item">
+            </a>
+        `
     }).join('');
 
     herobox.insertAdjacentHTML('beforeend', list);
+};
+
+export const renderHeroes = (page = 1, heroes) => {
+
+};
+
+const displayButton = () => {
+
+}
+
+export const renderButtons = () => {
+
 }
 
 

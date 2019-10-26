@@ -7,13 +7,24 @@ const searchHero = async () => {
     clearHeroBox();
     showLoader();
     state.search = new Hero(document.querySelector('.btn__search').value);
-    await state.search.fetchHero();
-    displayHero(state.search.result);
+    try {
+        await state.search.fetchHero();
+        displayHero(state.search.result);
+    } catch (err) {
+        console.log(err);
+    }
     clearLoader();
     console.log(state.search.result);
 }
 
+
+// EVENT LISTENERS
 document.querySelector('.search').addEventListener('submit', e => {
     e.preventDefault();
     searchHero();
+})
+
+document.querySelector('.hero__box').addEventListener('click', e => {
+    const targetHero = e.target.closest('.item');
+    console.log(targetHero.dataset.id);
 })
