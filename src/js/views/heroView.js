@@ -1,5 +1,5 @@
 const herobox = document.querySelector('.hero__box');
-
+const btnbox = document.querySelector('.btn__box');
 const displayHero = hero => {
     return `
     <div class="col-3">
@@ -10,19 +10,42 @@ const displayHero = hero => {
     `;
 };
 
+//Render parts of heroes in the array
 export const renderHeroes = (heroes, page = 1) => {
     const list = heroes.map(hero => displayHero(hero));
     const start = (page - 1) * 8;
-    const displayedHeroes = list.splice(start, 8).join('');
+    const end = (page * 8);
+    const displayedHeroes = list.slice(start, end).join('');
     herobox.insertAdjacentHTML('beforeend', displayedHeroes);
 };
 
-const displayButton = () => {
-
+//Separate method for getting button html to be used in renderButtons()
+const displayButton = (type, page) => {
+    return `<a class="btn__page--${type} btn btn-lg btn-danger" data-type="${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>${type}</a>`
 }
 
-export const renderButtons = () => {
+export const renderButtons = (page, resultCount) => {
+    const pageCount = Math.ceil(resultCount / 8);
+    let button;
 
+    if (pageCount > 1) {
+        if (page === 1) {
+            button = displayButton('next', page);
+        } else if (page > 1 && page < pageCount) {
+            button = `
+            ${displayButton('prev', page)}
+            ${displayButton('next', page)}
+            `;
+        } else if (page === pageCount) {
+            button = displayButton('prev', page);
+        } else {
+            alert('Something went wrong with the pagination. Please reload.');
+        }
+    } else {
+        button = '';
+    }
+
+    btnbox.insertAdjacentHTML('beforeend', button);
 }
 
 export const renderHeroStats = hero => {
@@ -81,14 +104,21 @@ export const renderHeroStats = hero => {
     descBox.insertAdjacentHTML('afterbegin', template);
 };
 
+export const displaySearchInfo = (heroes, input) => {
+    const text = `<h2 class="search__info">Displaying ${heroes.length} results matching <span class="bg-danger">${input}</span></h2>`;
+    document.querySelector('.header').insertAdjacentHTML('afterbegin', text);
+};
+
 export const clearHeroBox = () => {
     herobox.innerHTML = '';
+    btnbox.innerHTML = '';
+
 };
 
 
 export const showLoader = () => {
-    herobox.insertAdjacentHTML('afterbegin', `
-    <div class="spinner-border m-5" role="status">
+    herobox.insertAdjacentHTML('beforeend', `
+    <div class="spinner-border" role="status">
         <span class="sr-only">Loading...</span>
     </div>`
     );

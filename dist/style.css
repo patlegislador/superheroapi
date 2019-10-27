@@ -12,12 +12,13 @@ body {
 
 .header {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding: 10px;
     background: #ec9000;
 }
 
 .btn__search {
+    font-size: 25px;
     padding: 10px;
     border-radius: 25px;
     text-align: center;
@@ -31,48 +32,57 @@ body {
 }
 
 .content {
+    display: flex;
+    flex-wrap: wrap;
     max-width: 100%;
     height: 80vh;
     padding: 15px;
-    justify-content: space-evenly;
 }
 
 .hero__box {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 75vh;
     max-height: 80vh;
 }
 
 .default__text {
+    grid-column: 1 / -1;
     text-align: center;
-    place-self: center;
-    opacity: 0.5;
+    align-self: center;
+    opacity: 0.2;
 }
 
 .spinner-border {
+    grid-column: 1 / -1;
     width: 100px;
     height: 100px;
-    margin-left: 30%;
+    margin: 20% auto;
 }
 
 .desc__box {
     text-shadow: 1px 1px black;
     text-align: center;
-    max-height: 85vh;
+    max-height: 75vh;
 }
 
 .hero__desc {
     background: rgba(255, 255, 255, 0.4);
     border-radius: 20px;
     padding: 15px;
+    max-height: 85vh;
     animation: fadeIn 1s;
+}
+
+.hero__name {
+    text-shadow: 2px 2px black;
 }
 
 .item {
     border: 10px solid rgba(0, 0, 0, 0.1);
     border-radius: 30px;
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 260px;
+    max-height: 260px;
     animation: bounceIn 1s;
 }
 
@@ -80,6 +90,31 @@ body {
     transform: scale(1.05);
     cursor: pointer;
     border: 2px solid #ecd018;
+}
+
+.btn__box {
+   display: flex;
+}
+
+.page__desc {
+    width: 3rem;
+    margin-left: 10%;
+}
+
+.page__num {
+    margin: 5px 5px 5px 0;
+}
+
+.btn__page--prev {
+    width: 10rem;
+    position: absolute;
+    left: 250px;
+}
+
+.btn__page--next {
+    width: 10rem;
+    position: absolute;
+    left: 600px;
 }
 
 

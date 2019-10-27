@@ -1,17 +1,25 @@
 import Heroes from './models/Heroes';
-import { renderHeroes, clearHeroBox, showLoader, clearLoader, renderHeroStats } from './views/heroView';
+import { renderHeroes, clearHeroBox, showLoader, clearLoader, renderHeroStats, renderButtons, displaySearchInfo } from './views/heroView';
 
-const state = {};
+const state = {
+    page: 1
+};
 window.s = state;
 
 const searchHero = async () => {
+    state.page = 1;
+    const input = document.querySelector('.btn__search').value;
+    const newHeroes = new Heroes(input);
+
     clearHeroBox();
     showLoader();
-    const newHeroes = new Heroes(document.querySelector('.btn__search').value); //
     try {
         await newHeroes.fetchHero();
         state.heroes = newHeroes.result;
-        renderHeroes(state.heroes);
+        console.log(state.heroes, state.heroes.length);
+        displaySearchInfo(state.heroes, input);
+        renderHeroes(state.heroes, state.page);
+        renderButtons(state.page, state.heroes.length);
     } catch (err) {
         console.log(err);
     }
@@ -40,4 +48,21 @@ document.querySelector('.hero__box').addEventListener('click', e => {
             }
         });
     }
+})
+
+document.querySelector('.btn__box').addEventListener('click', e => {
+
+    if (e.target.dataset.type === 'prev') {
+        state.page = state.page - 1;
+    } else {
+        state.page = state.page + 1;
+    }
+
+    console.log(state.page);
+    clearHeroBox();
+    showLoader();
+    renderHeroes(state.heroes, state.page)
+    renderButtons(state.page, state.heroes.length - 1);
+    clearLoader();
+
 })
