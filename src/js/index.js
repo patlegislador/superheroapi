@@ -1,5 +1,5 @@
 import Heroes from './models/Heroes';
-import { renderHeroes, clearHeroBox, showLoader, clearLoader, renderHeroStats, renderButtons, displaySearchInfo } from './views/heroView';
+import { renderHeroes, clearHeroBox, showLoader, clearLoader, renderHeroStats, renderButtons, displaySearchInfo, handleFetchError } from './views/heroView';
 
 const state = {
     page: 1
@@ -8,20 +8,24 @@ window.s = state;
 
 const searchHero = async () => {
     state.page = 1;
-    const input = document.querySelector('.btn__search').value;
-    const newHeroes = new Heroes(input);
+    state.input = document.querySelector('.btn__search').value;
+    const newHeroes = new Heroes(state.input);
 
     clearHeroBox();
     showLoader();
     try {
         await newHeroes.fetchHero();
         state.heroes = newHeroes.result;
-        console.log(state.heroes, state.heroes.length);
-        displaySearchInfo(state.heroes, input);
-        renderHeroes(state.heroes, state.page);
-        renderButtons(state.page, state.heroes.length);
+        if (state.heroes) {
+            displaySearchInfo(state.heroes, state.input);
+            renderHeroes(state.heroes, state.page);
+            renderButtons(state.page, state.heroes.length);
+        } else {
+            handleFetchError(state.input);
+        }
     } catch (err) {
-        console.log(err);
+
+        console.log(err); q
     }
     clearLoader();
 }
@@ -50,6 +54,9 @@ document.querySelector('.hero__box').addEventListener('click', e => {
     }
 })
 
+
+
+//Event listener for All clicks inside the Button Box
 document.querySelector('.btn__box').addEventListener('click', e => {
 
     if (e.target.dataset.type === 'prev') {
@@ -57,12 +64,15 @@ document.querySelector('.btn__box').addEventListener('click', e => {
     } else {
         state.page = state.page + 1;
     }
+    console.log(e.target.dataset.type);
 
-    console.log(state.page);
-    clearHeroBox();
-    showLoader();
-    renderHeroes(state.heroes, state.page)
-    renderButtons(state.page, state.heroes.length - 1);
-    clearLoader();
+    if (e.target.dataset.type) {
+        clearHeroBox();
+        showLoader();
+        displaySearchInfo(state.heroes, state.input);
+        renderHeroes(state.heroes, state.page);
+        renderButtons(state.page, state.heroes.length - 1);
+        clearLoader();
+    }
 
 })

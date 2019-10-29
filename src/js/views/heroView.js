@@ -1,16 +1,22 @@
 const herobox = document.querySelector('.hero__box');
 const btnbox = document.querySelector('.btn__box');
+const descbox = document.querySelector('.desc__box');
+const searchtitle = document.querySelector('.search__info');
+
+
+//Template for each hero
 const displayHero = hero => {
     return `
-    <div class="col-3">
-        <a href="#${hero.id}">
-            <img src="${hero.image.url}" alt="${hero.name}" class="item" data-id="${hero.id}">
-        </a>
+    <div class="col-3 my-2">
+        <div class="item" style="background-image: url(${hero.image.url})" data-id="${hero.id}">
+            <a href="#${hero.id}">
+            </a>
+        </div>
     </div>
     `;
 };
 
-//Render parts of heroes in the array
+//Render parts of heroes in the array using displayHero()
 export const renderHeroes = (heroes, page = 1) => {
     const list = heroes.map(hero => displayHero(hero));
     const start = (page - 1) * 8;
@@ -24,6 +30,7 @@ const displayButton = (type, page) => {
     return `<a class="btn__page--${type} btn btn-lg btn-danger" data-type="${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>${type}</a>`
 }
 
+//Rendering buttons on the button box
 export const renderButtons = (page, resultCount) => {
     const pageCount = Math.ceil(resultCount / 8);
     let button;
@@ -48,70 +55,52 @@ export const renderButtons = (page, resultCount) => {
     btnbox.insertAdjacentHTML('beforeend', button);
 }
 
+const renderStat = powerstats => {
+    const statTemplate = Object.keys(powerstats).map(stat => `
+        <div class="progress">
+            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" role="progressbar" style="width: ${powerstats[stat]}%"
+                aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <p class="mt-1">${stat}: ${powerstats[stat]}</p>
+    `);
+
+    return statTemplate.join('');
+}
+
 export const renderHeroStats = hero => {
     const descBox = document.querySelector('.desc__box');
     descBox.innerHTML = '';
     Object.keys(hero.powerstats).map(stat => {
-        hero.powerstats[stat] === 'null' ? hero.powerstats[stat] = 'Unknown' : null;
+        hero.powerstats[stat] === 'null' ? hero.powerstats[stat] = '???' : null;
     });
+
     const template = `
     <div class="hero__desc">
-         <h3 class="hero__name">${hero.name}</h3>
-            <h5 class="hero__alias">"${hero.biography.aliases[0]}"</h5>
-            <hr>
+        <h1 class="hero__name bg-danger">${hero.name}</h1>
+        <h4 class="hero__alias">${hero.biography.aliases[0] === '-' ? '<span class="bg-danger px-2">N/A</span>' : hero.biography.aliases[0]}</h4>
 
-            <div class="hero__stats">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${hero.powerstats.combat}%"
-                        aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="bg-primary mt-1">Combat: ${hero.powerstats.combat}</p>
-
-
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: ${hero.powerstats.durability}%"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="bg-success mt-1">Durability: ${hero.powerstats.durability}</p>
-
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${hero.powerstats.intelligence}%"
-                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="bg-info mt-1">Intelligence: ${hero.powerstats.intelligence}</p>
-
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: ${hero.powerstats.power}%"
-                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="bg-warning mt-1">Power: ${hero.powerstats.power}</p>
-
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: ${hero.powerstats.speed}%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="bg-danger mt-1">Speed: ${hero.powerstats.speed}</p>
-
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" style="width: ${hero.powerstats.strength}%"
-                        aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <p class="bg-dark mt-1">Strength: ${hero.powerstats.strength}</p>
-            </div>
+        <div class="hero__stats">
+            ${renderStat(hero.powerstats)}
         </div>
+    </div>
     `;
 
     descBox.insertAdjacentHTML('afterbegin', template);
 };
 
 export const displaySearchInfo = (heroes, input) => {
-    const text = `<h2 class="search__info">Displaying ${heroes.length} results matching <span class="bg-danger">${input}</span></h2>`;
-    document.querySelector('.header').insertAdjacentHTML('afterbegin', text);
+    searchtitle.innerHTML = `Displaying <span class="bg-danger px-2">${heroes.length}</span> results matching <span class="bg-danger px-2">${input}</span>`;
+};
+
+export const handleFetchError = (input) => {
+    searchtitle.innerHTML = `<span class="bg-dark px-2">No results matching "${input}"</span>`;
 };
 
 export const clearHeroBox = () => {
     herobox.innerHTML = '';
     btnbox.innerHTML = '';
+    descbox.innerHTML = '';
+    if (searchtitle) searchtitle.innerHTML = '';
 
 };
 
