@@ -1,5 +1,8 @@
 import Heroes from './models/Heroes';
-import { renderHeroes, clearHeroBox, showLoader, clearLoader, renderHeroStats, renderButtons, displaySearchInfo, handleFetchError } from './views/heroView';
+import { renderHeroes } from './views/heroView';
+import { renderButtons } from './views/buttonsView';
+import { renderHeroStats } from './views/statsView';
+import { elements, handleFetchError, clearHeroBox, clearLoader, showLoader, displaySearchInfo } from './views/mainView';
 
 const state = {
     page: 1
@@ -8,7 +11,7 @@ window.s = state;
 
 const searchHero = async () => {
     state.page = 1;
-    state.input = document.querySelector('.btn__search').value;
+    state.input = elements.searchBtn.value;
     const newHeroes = new Heroes(state.input);
 
     clearHeroBox();
@@ -34,14 +37,14 @@ const searchHero = async () => {
 // EVENT LISTENERS
 
 //Even listener for Search Button
-document.querySelector('.search').addEventListener('submit', e => {
+elements.searchBar.addEventListener('submit', e => {
     e.preventDefault();
     searchHero();
 })
 
 
 //Event Listener for All clicks inside the Hero Box
-document.querySelector('.hero__box').addEventListener('click', e => {
+elements.herobox.addEventListener('click', e => {
     const targetHero = e.target.closest('.item');
     if (targetHero) { // make sure what we are clicking isn't null
         const heroID = targetHero.dataset.id;
@@ -57,7 +60,7 @@ document.querySelector('.hero__box').addEventListener('click', e => {
 
 
 //Event listener for All clicks inside the Button Box
-document.querySelector('.btn__box').addEventListener('click', e => {
+elements.btnbox.addEventListener('click', e => {
 
     if (e.target.dataset.type === 'prev') {
         state.page = state.page - 1;
@@ -75,4 +78,9 @@ document.querySelector('.btn__box').addEventListener('click', e => {
         clearLoader();
     }
 
+})
+
+//homepage 
+elements.homeBtn.addEventListener('click', () => {
+    elements.homePage.classList.add('fadeOutLeft');
 })
