@@ -13,7 +13,7 @@ const renderStat = powerstats => {
 }
 
 export const renderHeroStats = hero => {
-    elements.descBox.innerHTML = '';
+    elements.descbox.innerHTML = '';
     Object.keys(hero.powerstats).map(stat => {
         hero.powerstats[stat] === 'null' ? hero.powerstats[stat] = '???' : null;
     });
@@ -29,5 +29,5 @@ export const renderHeroStats = hero => {
     </div>
     `;
 
-    elements.descBox.insertAdjacentHTML('afterbegin', template);
+    elements.descbox.insertAdjacentHTML('afterbegin', template);
 };

@@ -6,7 +6,8 @@ export const elements = {
     searchBtn: document.querySelector('.btn__search'),
     homeBtn: document.querySelector('.btn__home'),
     searchBar: document.querySelector('.search'),
-    homePage: document.querySelector('.homepage')
+    homePage: document.querySelector('.homepage'),
+    exitBtn: document.querySelector('.btn__exit')
 }
 
 export const displaySearchInfo = (heroes, input) => {
@@ -22,7 +23,6 @@ export const clearHeroBox = () => {
     elements.btnbox.innerHTML = '';
     elements.descbox.innerHTML = '';
     if (elements.searchtitle) elements.searchtitle.innerHTML = '';
-
 };
 
 export const showLoader = () => {

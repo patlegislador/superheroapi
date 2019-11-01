@@ -7,7 +7,6 @@ import { elements, handleFetchError, clearHeroBox, clearLoader, showLoader, disp
 const state = {
     page: 1
 };
-window.s = state;
 
 const searchHero = async () => {
     state.page = 1;
@@ -62,10 +61,14 @@ elements.herobox.addEventListener('click', e => {
 //Event listener for All clicks inside the Button Box
 elements.btnbox.addEventListener('click', e => {
 
+    let animation;
+
     if (e.target.dataset.type === 'prev') {
         state.page = state.page - 1;
+        animation = 'zoomInRight';
     } else {
         state.page = state.page + 1;
+        animation = 'zoomInLeft';
     }
     console.log(e.target.dataset.type);
 
@@ -73,7 +76,7 @@ elements.btnbox.addEventListener('click', e => {
         clearHeroBox();
         showLoader();
         displaySearchInfo(state.heroes, state.input);
-        renderHeroes(state.heroes, state.page);
+        renderHeroes(state.heroes, state.page, animation);
         renderButtons(state.page, state.heroes.length - 1);
         clearLoader();
     }
@@ -82,5 +85,10 @@ elements.btnbox.addEventListener('click', e => {
 
 //homepage 
 elements.homeBtn.addEventListener('click', () => {
-    elements.homePage.classList.add('fadeOutLeft');
-})
+    elements.homePage.classList.add('fadeOutUp');
+});
+
+elements.exitBtn.addEventListener('click', () => {
+    elements.homePage.classList.remove('fadeOutUp');
+    elements.homePage.classList.add('fadeInDown');
+});

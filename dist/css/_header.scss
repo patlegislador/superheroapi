@@ -1,0 +1,26 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 10px;
+    background: #ec9000;
+}
+
+.btn__search {
+    font-size: 25px;
+    padding: 10px;
+    border-radius: 25px;
+    text-align: center;
+    outline: none;
+    border: none;
+
+    &:focus::placeholder {
+        opacity: 0;
+    }
+}
+
+.btn__exit {
+    color: #fff;
+    text-align: center;
+    height: 30%;
+}

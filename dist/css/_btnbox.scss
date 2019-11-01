@@ -1,0 +1,29 @@
+.btn__box {
+    display: flex;
+    margin-top: -3rem;
+ }
+ 
+ .page__desc {
+     width: 3rem;
+     margin-left: 10%;
+ }
+ 
+ .page__num {
+     margin: 5px 5px 5px 0;
+ }
+ 
+ .btn__page {
+     border-radius: 10px;
+    width: 10rem;
+    position: absolute;
+ }
+
+ .btn__page--prev {
+     @extend .btn__page;
+     left: 30%;
+ }
+ 
+ .btn__page--next {
+     @extend .btn__page;
+     left: 65%;
+ }

@@ -1,0 +1,21 @@
+.desc__box {
+    text-align: center;
+    text-shadow: 1px 1px black;
+    border-radius: 20px;
+    height: 85vh;
+    max-height: 85vh;
+}
+
+.hero__desc {
+    max-height: 85vh;
+    animation: fadeIn 0.75s;
+}
+
+.hero__alias {
+    margin-bottom: 1rem;
+}
+
+.hero__name {
+    text-shadow: 3px 3px black;
+    transform: rotate(1deg) skew(5deg);
+}
