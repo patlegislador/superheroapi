@@ -1,4 +1,4 @@
-import Heroes from './models/Heroes';
+import Search from './models/Search';
 import { renderHeroes } from './views/heroView';
 import { renderButtons } from './views/buttonsView';
 import { renderHeroStats } from './views/statsView';
@@ -8,39 +8,34 @@ const state = {
     page: 1
 };
 
-const searchHero = async () => {
+const searchHeroes = async () => {
     state.page = 1;
     state.input = elements.searchBtn.value;
-    const newHeroes = new Heroes(state.input);
+    const newSearch = new Search(state.input);
 
     clearHeroBox();
     showLoader();
     try {
-        await newHeroes.fetchHero();
-        state.heroes = newHeroes.result;
-        if (state.heroes) {
-            displaySearchInfo(state.heroes, state.input);
-            renderHeroes(state.heroes, state.page);
-            renderButtons(state.page, state.heroes.length);
+        await newSearch.fetchResults();
+        state.search = newSearch.result;
+        if (state.search) {
+            renderData();
         } else {
             handleFetchError(state.input);
         }
     } catch (err) {
-
-        console.log(err); q
+        console.log(err);
     }
     clearLoader();
 }
-
 
 // EVENT LISTENERS
 
 //Even listener for Search Button
 elements.searchBar.addEventListener('submit', e => {
     e.preventDefault();
-    searchHero();
+    searchHeroes();
 })
-
 
 //Event Listener for All clicks inside the Hero Box
 elements.herobox.addEventListener('click', e => {
@@ -48,14 +43,14 @@ elements.herobox.addEventListener('click', e => {
     if (targetHero) { // make sure what we are clicking isn't null
         const heroID = targetHero.dataset.id;
 
-        state.heroes.forEach(hero => {
+        state.search.forEach(hero => {
             if (hero.id === heroID) { //matches hero in the state and clicked hero using id -> render stats
                 renderHeroStats(hero);
+                //state.hero = new Hero(targetHero)
             }
-        });
+        });;
     }
 })
-
 
 
 //Event listener for All clicks inside the Button Box
@@ -70,14 +65,11 @@ elements.btnbox.addEventListener('click', e => {
         state.page = state.page + 1;
         animation = 'zoomInLeft';
     }
-    console.log(e.target.dataset.type);
 
     if (e.target.dataset.type) {
         clearHeroBox();
         showLoader();
-        displaySearchInfo(state.heroes, state.input);
-        renderHeroes(state.heroes, state.page, animation);
-        renderButtons(state.page, state.heroes.length - 1);
+        renderData(animation);
         clearLoader();
     }
 
@@ -85,6 +77,7 @@ elements.btnbox.addEventListener('click', e => {
 
 //homepage 
 elements.homeBtn.addEventListener('click', () => {
+    elements.homePage.classList.remove('fadeInDown');
     elements.homePage.classList.add('fadeOutUp');
 });
 
@@ -92,3 +85,12 @@ elements.exitBtn.addEventListener('click', () => {
     elements.homePage.classList.remove('fadeOutUp');
     elements.homePage.classList.add('fadeInDown');
 });
+
+
+// FUNCTIONS
+
+function renderData(animation) {
+    displaySearchInfo(state.search, state.input);
+    renderHeroes(state.search, state.page, animation);
+    renderButtons(state.page, state.search.length);
+}
