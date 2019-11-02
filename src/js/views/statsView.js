@@ -20,7 +20,7 @@ export const renderHeroStats = hero => {
 
     const template = `
     <div class="hero__desc">
-        <h1 class="hero__name bg-danger">${hero.name}</h1>
+        <a href="#profile" class="hero__name bg-danger">${hero.name}</a>
         <h4 class="hero__alias">${hero.biography.aliases[0] === '-' ? '<span class="bg-danger px-2">N/A</span>' : hero.biography.aliases[0]}</h4>
 
         <div class="hero__stats">

@@ -18,4 +18,12 @@
 .hero__name {
     text-shadow: 3px 3px black;
     transform: rotate(1deg) skew(5deg);
+    text-anchor: end;
+    font-size: 2rem;
+    color: inherit;
+
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
 }

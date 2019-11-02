@@ -2,11 +2,15 @@ import Search from './models/Search';
 import { renderHeroes } from './views/heroView';
 import { renderButtons } from './views/buttonsView';
 import { renderHeroStats } from './views/statsView';
+import { renderProfile, clearExisitingProfile } from './views/profileView';
 import { elements, handleFetchError, clearHeroBox, clearLoader, showLoader, displaySearchInfo } from './views/mainView';
+import Hero from './models/Hero';
 
 const state = {
     page: 1
 };
+
+window.s = state;
 
 const searchHeroes = async () => {
     state.page = 1;
@@ -46,7 +50,10 @@ elements.herobox.addEventListener('click', e => {
         state.search.forEach(hero => {
             if (hero.id === heroID) { //matches hero in the state and clicked hero using id -> render stats
                 renderHeroStats(hero);
-                //state.hero = new Hero(targetHero)
+                console.log(hero);
+                state.hero = new Hero(hero);
+                clearExisitingProfile();
+                renderProfile(state.hero);
             }
         });;
     }
