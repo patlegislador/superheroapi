@@ -29,24 +29,43 @@ body {
 }
 
 .hero__profile {
-    height: 100vh;
-    display: flex;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: #090909;
+    display: grid;
+    grid-template-areas: 
+    'btn btn btn'
+    'left right right'
+    'left right right';
+    
     .left {
+        grid-area: left;
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         margin: auto;
-        width: 50%;
         img {
             border: 5px solid #ec9000;
             border-radius: 20px;
-            width: 50%;
+            width: 80%;
         }
-
     }
+
     .right {
+        grid-area: right;
         border: 1px solid black;
-        width: 50%;
         margin: auto;
+        padding: 20px;
+    }
+
+    .profile__back {
+        grid-area: btn;
+        margin: auto;
+        padding: 10px 50px;
+        animation-iteration-count: infinite;
+        background: #ec9000;
+        color: inherit;
     }
 }
 

@@ -6,6 +6,7 @@ export default class Hero {
             this.race = hero.appearance.race,
             this.alterego = hero.biography['alter-egos'],
             this.alignment = hero.biography.alignment,
+            this.work = hero.work.occupation,
             this.img = hero.image.url
     }
 }

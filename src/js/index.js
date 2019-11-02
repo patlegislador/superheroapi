@@ -52,10 +52,15 @@ elements.herobox.addEventListener('click', e => {
                 renderHeroStats(hero);
                 console.log(hero);
                 state.hero = new Hero(hero);
-                clearExisitingProfile();
-                renderProfile(state.hero);
             }
         });;
+    }
+})
+
+elements.descbox.addEventListener('click', e => {
+    if (e.target.matches('.hero__name')) {
+        clearExisitingProfile();
+        renderProfile(state.hero);
     }
 })
 
@@ -92,7 +97,6 @@ elements.exitBtn.addEventListener('click', () => {
     elements.homePage.classList.remove('fadeOutUp');
     elements.homePage.classList.add('fadeInDown');
 });
-
 
 // FUNCTIONS
 

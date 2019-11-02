@@ -1,7 +1,7 @@
 import { elements } from './mainView';
 
 //Separate method for getting button html to be used in renderButtons()
-const displayButton = (type, page) => `<a class="btn__page--${type} btn btn-lg btn-danger" data-type="${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>${type === 'prev' ? 'Previous' : 'Next'}</a>`;
+const displayButton = (type, page) => `<a class="btn__page--${type} btn btn-lg" data-type="${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>${type === 'prev' ? '◄' : '►'}</a>`;
 
 //Rendering buttons on the button box
 export const renderButtons = (page, resultCount) => {

@@ -8,7 +8,8 @@ export const elements = {
     searchBar: document.querySelector('.search'),
     homePage: document.querySelector('.homepage'),
     exitBtn: document.querySelector('.btn__exit'),
-    profilePage: document.querySelector('.hero__profile')
+    profilePage: document.querySelector('.hero__profile'),
+    profileBtn: document.querySelector('.profile__back')
 }
 
 export const displaySearchInfo = (heroes, input) => {
