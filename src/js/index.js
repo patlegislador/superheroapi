@@ -2,7 +2,7 @@ import Search from './models/Search';
 import { renderHeroes } from './views/heroView';
 import { renderButtons } from './views/buttonsView';
 import { renderHeroStats } from './views/statsView';
-import { renderProfile, clearExisitingProfile } from './views/profileView';
+import { renderProfile, clearExisitingProfile, closeProfile } from './views/profileView';
 import { elements, handleFetchError, clearHeroBox, clearLoader, showLoader, displaySearchInfo } from './views/mainView';
 import Hero from './models/Hero';
 
@@ -52,18 +52,12 @@ elements.herobox.addEventListener('click', e => {
                 renderHeroStats(hero);
                 console.log(hero);
                 state.hero = new Hero(hero);
+                clearExisitingProfile();
+                renderProfile(state.hero);
             }
         });;
     }
 })
-
-elements.descbox.addEventListener('click', e => {
-    if (e.target.matches('.hero__name')) {
-        clearExisitingProfile();
-        renderProfile(state.hero);
-    }
-})
-
 
 //Event listener for All clicks inside the Button Box
 elements.btnbox.addEventListener('click', e => {
@@ -96,6 +90,7 @@ elements.homeBtn.addEventListener('click', () => {
 elements.exitBtn.addEventListener('click', () => {
     elements.homePage.classList.remove('fadeOutUp');
     elements.homePage.classList.add('fadeInDown');
+    closeProfile();
 });
 
 // FUNCTIONS
