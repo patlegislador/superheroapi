@@ -55,7 +55,7 @@ elements.herobox.addEventListener('click', e => {
                 clearExisitingProfile();
                 renderProfile(state.hero);
             }
-        });;
+        });
     }
 })
 
@@ -96,7 +96,7 @@ elements.exitBtn.addEventListener('click', () => {
 // FUNCTIONS
 
 function renderData(animation) {
-    displaySearchInfo(state.search, state.input);
+    displaySearchInfo(state.page, state.search, state.input);
     renderHeroes(state.search, state.page, animation);
     renderButtons(state.page, state.search.length);
 }

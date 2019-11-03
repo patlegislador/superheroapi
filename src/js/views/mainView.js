@@ -12,13 +12,16 @@ export const elements = {
     profileBtn: document.querySelector('.profile__back')
 }
 
-export const displaySearchInfo = (heroes, input) => {
-    elements.searchtitle.innerHTML = `Displaying <span class="bg-danger px-2">${heroes.length}</span> results matching <span class="bg-danger px-2">${input}</span>`;
+export const displaySearchInfo = (page, heroes, input) => {
+    const start = (page === 1 ? '1' : page + ((page - 1) * 7));
+    const end = page * 8;
+    elements.searchtitle.innerHTML = `Displaying <span class="bg-danger px-2">${start} - ${end}</span> of <span class="bg-danger px-2">${heroes.length}</span> results matching <span class="bg-danger px-2">${input}</span>`;
 };
 
 export const handleFetchError = (input) => {
     elements.searchtitle.innerHTML = `<span class="bg-dark px-2">No results matching "${input}"</span>`;
 };
+
 
 export const clearHeroBox = () => {
     elements.herobox.innerHTML = '';
