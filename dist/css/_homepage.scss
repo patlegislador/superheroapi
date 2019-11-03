@@ -10,8 +10,10 @@
 
     .btn {
         margin: auto;
-        border: 1px solid black;
         padding: 0.5rem 3rem;
+        outline: none;
+        color: inherit;
+        text-shadow: 1px 1px #000;
     }
 }
 
