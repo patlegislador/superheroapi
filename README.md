@@ -1,12 +1,14 @@
 # superheroapi
 API-based comic character generator
 
-## Collaboration
+### Collaboration
 Open to everyone. Forking is allowed, please submit all pull requests for review.
 
-## Technologies
+### Technologies
 Webpack (HTML Plugin)
 BabelJS
 SASS CSS
 Axios
 
+### Powered By:
+SuperHeroAPI: https://superheroapi.com/
