@@ -1,11 +1,12 @@
 import { elements } from './mainView';
 
 export const renderProfile = hero => {
+
     elements.profilePage.style.display = 'grid';
     const template = `
         <a class="profile__back btn btn-lg animated pulse" href="#">▲</a>
         <div class="left">
-            <img src="${hero.img}" alt="${hero.name}">
+            <img src="${hero.img}" alt="${hero.name}" onerror="this.src='https://www.pnglot.com/pngfile/detail/173-1734608_random-stuff-unknown-character.png'">
         </div>
 
         <div class="right">
@@ -18,7 +19,6 @@ export const renderProfile = hero => {
             <h2 class="profile__job">Occupation: <span class="bg-danger">${hero.work}</span></h2>
         </div>
     `;
-
     elements.profilePage.insertAdjacentHTML('afterbegin', template);
 }
 
@@ -30,4 +30,3 @@ export const clearExisitingProfile = () => {
 export const closeProfile = () => {
     if (elements.profilePage) elements.profilePage.style.display = 'none';
 }
-

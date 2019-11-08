@@ -13,8 +13,9 @@ export const elements = {
 }
 
 export const displaySearchInfo = (page, heroes, input) => {
-    const start = (page === 1 ? '1' : page + ((page - 1) * 7));
-    const end = page * 8;
+    let start = (page === 1 ? '1' : page + ((page - 1) * 7));
+    let end = page * 8;
+    if (end > heroes.length) end = heroes.length;
     elements.searchtitle.innerHTML = `Displaying <span class="bg-danger px-2">${start} - ${end}</span> of <span class="bg-danger px-2">${heroes.length}</span> results matching <span class="bg-danger px-2">${input}</span>`;
 };
 
