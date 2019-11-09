@@ -3,28 +3,9 @@ import { elements } from './mainView';
 //Template for each hero
 const displayHero = (hero, animation) => {
 
-    // testImage(hero.image.url).then(
-
-    //     function fulfilled(img) {
-    //         console.log('That image is found and loaded', img);
-    //     },
-
-    //     function rejected() {
-    //         console.log('That image was not found');
-    //     }
-
-    // );
-
-    // const imageSource = await testImage(hero.image.url);
-
     return `
-    <div class="col-3 my-2 item__box animated ${animation} fast">
-        <div class="item" style="background-image: url('${hero.image.url}')" data-id="${hero.id}">
-            <a href="#${hero.id}">
-            </a>
-        </div>
-    </div>
-    `;
+        <img src="${hero.image.url}" class="animated ${animation} fast" data-id="${hero.id}" alt="${hero.name}" onerror="this.src='https://www.pnglot.com/pngfile/detail/173-1734608_random-stuff-unknown-character.png';">
+        `;
 };
 
 //Render parts of heroes in the array using displayHero()

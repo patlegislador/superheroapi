@@ -13,10 +13,12 @@
         display: flex;
         justify-content: flex-end;
         margin: auto;
+
         img {
             border: 5px solid #ec9000;
             border-radius: 20px;
             width: 80%;
+            max-width: 750px;
         }
     }
 

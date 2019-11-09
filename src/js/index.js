@@ -43,7 +43,8 @@ elements.searchBar.addEventListener('submit', e => {
 
 //Event Listener for All clicks inside the Hero Box
 elements.herobox.addEventListener('click', e => {
-    const targetHero = e.target.closest('.item');
+    const targetHero = e.target.closest('img');
+    console.log(targetHero);
     if (targetHero) { // make sure what we are clicking isn't null
         const heroID = targetHero.dataset.id;
 
