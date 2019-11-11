@@ -16,7 +16,7 @@ export const displaySearchInfo = (page, heroes, input) => {
     let start = (page === 1 ? '1' : page + ((page - 1) * 7));
     let end = page * 8;
     if (end > heroes.length) end = heroes.length;
-    elements.searchtitle.innerHTML = `Displaying <span class="bg-danger px-2">${start} - ${end}</span> of <span class="bg-danger px-2">${heroes.length}</span> results matching <span class="bg-danger px-2">${input}</span>`;
+    elements.searchtitle.innerHTML = `<span class="bg-danger px-2">Page ${page}</span> Displaying <span class="bg-danger px-2">${start} - ${end}</span> of <span class="bg-danger px-2">${heroes.length}</span> results matching <span class="bg-danger px-2">${input}</span>`;
 };
 
 export const handleFetchError = (input) => {

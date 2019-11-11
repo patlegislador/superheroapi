@@ -113,7 +113,7 @@ body {
 .hero__box {
   height: 75vh;
   max-height: 80vh;
-  padding-bottom: 30px;
+  padding: 0 0 30px 30px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr 1fr;
@@ -153,6 +153,8 @@ body {
   width: 100px;
   height: 100px;
   margin: 20% auto;
+  color: #ec9000;
+  font-size: 50px;
 }
 
 .desc__box {
