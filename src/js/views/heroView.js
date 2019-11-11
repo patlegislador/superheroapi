@@ -2,7 +2,6 @@ import { elements } from './mainView';
 
 //Template for each hero
 const displayHero = (hero, animation) => {
-
     return `
         <img src="${hero.image.url}" class="animated ${animation} fast" data-id="${hero.id}" alt="${hero.name}" onerror="this.src='https://www.pnglot.com/pngfile/detail/173-1734608_random-stuff-unknown-character.png';">
         `;
@@ -17,23 +16,23 @@ export const renderHeroes = (heroes, page = 1, animation) => {
     elements.herobox.insertAdjacentHTML('beforeend', list.join(''));
 };
 
-const testImage = url => {
+// const testImage = url => {
 
-    const imgPromise = new Promise(function imgPromise(resolve, reject) {
+//     const imgPromise = new Promise(function imgPromise(resolve, reject) {
 
-        const imgElement = new Image();
+//         const imgElement = new Image();
 
-        imgElement.addEventListener('load', function imgOnLoad() {
-            resolve(url);
-        });
+//         imgElement.addEventListener('load', () => {
+//             resolve(url);
+//         });
 
-        imgElement.addEventListener('error', function imgOnError() {
-            reject();
-        })
+//         imgElement.addEventListener('error', () => {
+//             reject();
+//         })
 
-        imgElement.src = url;
+//         imgElement.src = url;
 
-    });
+//     });
 
-    return imgPromise;
-}
+//     return imgPromise;
+// }
